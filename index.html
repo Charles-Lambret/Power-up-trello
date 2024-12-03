@@ -23,7 +23,6 @@
         },
         'attachment-sections': function (t, options) {
           return t.card('all').then(function (card) {
-            // Exemple : Affichage des pièces jointes associées (comme DriveURL)
             const driveAttachments = options.entries.filter(entry => entry.url.includes('drive.google.com'));
             return [
               {
