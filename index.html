@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Power-Up Google Sheets</title>
+    <script src="https://p.trellocdn.com/power-up.min.js"></script>
+    <script>
+      // Initialisation du Power-Up
+      window.TrelloPowerUp.initialize({
+        'card-buttons': function (t) {
+          return [
+            {
+              icon: 'https://example.com/icon.png', // Icône pour le bouton
+              text: 'Voir détails',
+              callback: function (t) {
+                return t.popup({
+                  title: 'Détails depuis Google Sheets',
+                  url: './details.html', // Page HTML pour afficher les détails
+                  height: 300
+                });
+              }
+            }
+          ];
+        },
+        'attachment-sections': function (t, options) {
+          return t.card('all').then(function (card) {
+            // Exemple : Affichage des pièces jointes associées (comme DriveURL)
+            const driveAttachments = options.entries.filter(entry => entry.url.includes('drive.google.com'));
+            return [
+              {
+                claimed: driveAttachments,
+                icon: 'https://example.com/drive-icon.png', // Icône pour les pièces jointes Google Drive
+                title: 'Fichiers Google Drive',
+                content: {
+                  type: 'iframe',
+                  url: t.signUrl('./attachments.html'), // Page pour afficher des détails supplémentaires
+                  height: 150
+                }
+              }
+            ];
+          });
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <h1>Power-Up connecté à Google Sheets</h1>
+    <p>Ce Power-Up est conçu pour interagir avec vos cartes Trello et les données de Google Sheets.</p>
+  </body>
+</html>

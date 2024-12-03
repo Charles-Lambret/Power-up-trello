@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Détails depuis Google Sheets</title>
+    <script src="https://p.trellocdn.com/power-up.min.js"></script>
+  </head>
+  <body>
+    <h2>Détails de la carte</h2>
+    <p>Récupération des informations...</p>
+    <script>
+      window.TrelloPowerUp.initialize({
+        'on-enable': function (t) {
+          t.card('all').then(function (card) {
+            document.body.innerHTML = `
+              <h3>${card.name}</h3>
+              <p><strong>Date de début :</strong> ${card.startDate}</p>
+              <p><strong>Parcours :</strong> ${card.parcours}</p>
+              <p><a href="${card.url}" target="_blank">Lien Google Drive</a></p>
+            `;
+          });
+        }
+      });
+    </script>
+  </body>
+</html>
